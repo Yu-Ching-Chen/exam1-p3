@@ -37,23 +37,17 @@ public:
         _o_y = 0;
 
         _i_x = i_x_port.read();
-        wait(1*CLOCK_PERIOD, SC_NS);
 
         _o_y = _o_y + _i_x * filter_coef[2];
-        wait(1*CLOCK_PERIOD, SC_NS);
 
         _i_x = i_x_port.read();
-        wait(1*CLOCK_PERIOD, SC_NS);
 
         _o_y = _o_y + _i_x * filter_coef[1];
-        wait(1*CLOCK_PERIOD, SC_NS);
 
         _i_x = i_x_port.read();
-        wait(1*CLOCK_PERIOD, SC_NS);
 
         _o_y = _o_y + _i_x * filter_coef[0];
         o_y_port.write(_o_y);
-        wait();
     }
   }
 
@@ -109,6 +103,7 @@ private:
       data_ptr[1] = buffer.uc[1];
       data_ptr[2] = buffer.uc[2];
       data_ptr[3] = buffer.uc[3];
+      delay = sc_time(1*CLOCK_PERIOD, SC_NS);
       break;
 
     case tlm::TLM_WRITE_COMMAND:
@@ -123,6 +118,7 @@ private:
                   << std::dec << " is not valid" << std::endl;
         break;
       }
+      delay = sc_time(1*CLOCK_PERIOD, SC_NS);
       break;
 
     case tlm::TLM_IGNORE_COMMAND:
