@@ -69,17 +69,6 @@ SC_MODULE(stim) {
 
     cout << setw(8) << "time" << setw(8) << "y" << endl;
 
- 
-    while(!done){
-      initiator.read_from_socket(FILTER_CHECK_ADDR, mask, data.uc, 4);
-      output_num = data.sint;
-      if(output_num>0) done=true;
-    }
-    wait(10 * CLOCK_PERIOD, SC_NS);
-    initiator.read_from_socket(FILTER_RESULT_ADDR, mask, data.uc, 4);
-    total = data.sint;
-
-
     while(true) {
       while(!done){
         initiator.read_from_socket(FILTER_CHECK_ADDR, mask, data.uc, 4);
